@@ -1,0 +1,7 @@
+requests~=2.26.0
+beautifulsoup4==4.12.3
+Flask==2.25
+opencv-python==4.10.0.84
+numpy==1.21.6
+Pillow==9.40
+pytesseract==0.3.10
