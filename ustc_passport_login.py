@@ -1,3 +1,5 @@
+import json
+
 import requests
 from bs4 import BeautifulSoup
 from io import BytesIO
@@ -5,6 +7,7 @@ import pytesseract
 from PIL import Image
 import numpy as np
 import cv2
+
 
 class USTCPassportLogin(object):
     def __init__(self):
@@ -98,7 +101,9 @@ class USTCPassportLogin(object):
             # 拿到x_auth_token
             responce5 = self.sess.get(self.getTokenURL)
             # 'x-auth-token'
-            x_auth_token = responce5.json()['entity']['x_auth_token']
+            decoded_content = responce5.content.decode('utf-8-sig')
+            json_data = json.loads(decoded_content)
+            x_auth_token = json_data['entity']['x_auth_token']
             self.token = x_auth_token
             return x_auth_token is not None
         except Exception as e:
